@@ -4,6 +4,9 @@ var port = 3000;
 
 var server = http.createServer(requestHandler);
 
+//console.log(req.url);
+//console.log(req.method);
+
 
 function requestHandler(req, res){
 	console.log('inside the server variable');
