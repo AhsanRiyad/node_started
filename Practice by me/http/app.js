@@ -4,13 +4,10 @@ var port = 3000;
 
 var server = http.createServer(requestHandler);
 
-server.set('case sensitive routing', false);
 
 function requestHandler(req, res){
 	console.log('inside the server variable');
 	
-
-
 	if(req.url=="/"){
 		res.write("hellow world");
 		res.end();
@@ -20,7 +17,12 @@ function requestHandler(req, res){
 	{
 		fs.createReadStream('index.html').pipe(res);
 	}
-
+	else if(req.url=="/other"){
+		fs.readFile('index.html' , function(err,data){
+			res.write(data);
+			res.end();
+		});
+	}
 	else if(req.url=="/plainText")
 	{
 		res.writeHead(200,{'content-type': 'text/plain'});
