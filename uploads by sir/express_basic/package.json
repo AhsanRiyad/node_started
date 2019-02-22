@@ -1,0 +1,15 @@
+{
+  "name": "nai",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "author": "alamin",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mysql": "^2.16.0"
+  }
+}

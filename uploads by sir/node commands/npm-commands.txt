@@ -1,0 +1,28 @@
+[NPM VERSION]
+npm -v
+
+
+[GENERATE PACKAGE.JSON FILE]
+npm init
+(a wizard will guide you through the precess. you can change the values or can choose the default values by pressing Enter)
+
+
+[INSTALL PACKAGE]
+npm install <your-package-name>
+or
+npm i <your-package-name>
+(i is the short form of install)
+
+(to save the dependency in the package.json file, add --save flag)
+npm install <package> --save
+
+(you can specify multiple packages in one command separating them by spaces)
+npm install <package-1> <package-2> <package-3> --save
+
+
+[RE-INSTALL DEPENDENCIES FROM PACKAGE.JSON]
+npm install
+
+
+[RE-INSTALL AND UPDATE DEPENDENCIES FROM PACKAGE.JSON]
+npm update

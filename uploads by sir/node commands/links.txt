@@ -1,0 +1,6 @@
+[DOCS]
+https://nodejs.org/dist/latest-v8.x/docs/api/
+https://docs.npmjs.com/
+
+[TUTORIALS]
+https://www.tutorialspoint.com/nodejs/

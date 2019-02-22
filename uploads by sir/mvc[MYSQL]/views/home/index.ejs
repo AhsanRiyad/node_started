@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home Page</title>
+</head>
+<body>
+
+<h1>Welcome Home, <%=name%></h1> <a href="/logout">logout</a>
+
+	<table border="1" width="400px" align="center">
+		<tr>
+			<th>ID</th>
+			<th>USERNAME</th>
+			<th>TYPE</th>
+		</tr>
+
+		<% for(var i=0; i < uList.length; i++){ %>
+		<tr>
+			<td><%= uList[i].id %></td>
+			<td><%= uList[i].username %></td>
+			<td><%= uList[i].type %></td>
+		</tr>
+		<% } %>
+	</table>
+</body>
+</html>
