@@ -4,6 +4,6 @@
 	
 	$json = json_decode($obj);
 
-	header("content-type: application/json");	
+	header("content-type: application/json");
 	echo json_encode($json);;
 ?>

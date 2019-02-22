@@ -11,12 +11,12 @@ console.log(student);*/
 
 
 
-/*var student = require('./student');
+var student = require('./student');
 
 
 console.log(student.stdName);
 
-console.log(student.stdResult(3.91));*/
+console.log(student.stdResult(3.91));
 
 
 
