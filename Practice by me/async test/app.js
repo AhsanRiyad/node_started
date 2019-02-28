@@ -1,6 +1,4 @@
 
-
-
 //promise example
 
 /*function createPost(){
@@ -44,7 +42,6 @@ Promise.all([promise1, promise2, promise3, promise4]).then((values)=>console.log
 }
 
 async function init(){
-	
 
 	await b();
 
