@@ -1,0 +1,2 @@
+SQL> set serveroutput on size 30000;
+SQL> exec print_actor_quotes( <<some value>> );
