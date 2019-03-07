@@ -50,3 +50,57 @@ async function init(){
 
 
 init();*/
+
+
+
+/*
+function inside funciton calling
+
+function createPost(){
+	return new Promise((resolve, reject)=>{
+
+		setTimeout(()=>{
+			console.log('1');
+
+		const error = true;
+
+		if(!error){
+			resolve();
+		}else{
+			reject('error');
+		}
+	} , 2000);
+
+	});
+}
+
+
+
+function f2(f1){
+createPost().then(()=>{console.log('hello');}).catch(err=>{console.log('error is '+ err + f1)}) ;
+}
+
+f2('I know');*/
+
+
+/*
+better example
+f2('hi' , function(param){
+	console.log(param);
+
+});
+
+
+function f1(){
+	return new Promise(function(){
+		console.log('hellow world');
+	});
+
+}
+
+
+function f2(val , callback){
+	f1().then(callback('condition done: '+val));
+}
+
+*/
