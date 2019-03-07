@@ -13,10 +13,6 @@ var config = {
 
 var sql = 'CALL filterTodo';
 
-
-
-
-
 connection = mysql.createConnection(config);
 connection.query(sql, function(err, result)
 {
@@ -29,13 +25,3 @@ connection.query(sql, function(err, result)
 
 
 });
-
-
-
-
-
-
-
-
-
-
