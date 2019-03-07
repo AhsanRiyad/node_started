@@ -8,20 +8,17 @@ var config = {
 	host: '127.0.0.1' , 
 	user: 'root' , 
 	password: '',
-	database: 'ff'
+	database: 'ff',
+	multipleStatements: true
 };
 
-var sql = 'CALL filterTodo';
-
-connection = mysql.createConnection(config);
-connection.query(sql, function(err, result)
-{
-	if(err)
-	{
-		console.log('error');
-	}else{
-		console.log(result[0][0].u_type);
-	}
-
-
+var pool = mysql.createPool(config);
+pool.getConnection(function(err, conn) {
+  conn.query('select * from g_user');
+  conn.query('select g_u_email from g_user', function(err, rows) {
+    console.log(rows);
+  });
 });
+
+
+
