@@ -53,10 +53,10 @@ init();*/
 
 
 
-/*
-function inside funciton calling
 
-function createPost(){
+// function inside funciton calling
+
+/*function createPost(){
 	return new Promise((resolve, reject)=>{
 
 		setTimeout(()=>{
@@ -80,7 +80,10 @@ function f2(f1){
 createPost().then(()=>{console.log('hello');}).catch(err=>{console.log('error is '+ err + f1)}) ;
 }
 
-f2('I know');*/
+f2('I know');
+
+
+console.log('under the timeout');*/
 
 
 /*
