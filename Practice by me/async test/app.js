@@ -104,3 +104,48 @@ function f2(val , callback){
 }
 
 */
+
+
+
+
+/*function f1(param , callback){
+
+	console.log('not a good function');
+	setTimeout(function(){
+		console.log('timeout checking');
+	}, 2000);
+	callback();
+}
+
+
+f1(2 , function(){
+	console.log('inside call back');
+	setTimeout(function(){
+		console.log('timeout checking inside call back');
+	}, 2000);
+	console.log('inside call back 2');
+
+});*/
+
+
+
+/*
+
+Promise working
+
+function promise1(){
+	return new Promise(function(res , rej){
+		console.log('hello');
+		res();
+		rej();
+
+
+
+	});
+}
+
+promise1().then(function(){
+	console.log('after promise');
+}).catch(function(err){
+	console.log('erroor');
+	});;*/
