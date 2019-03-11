@@ -152,3 +152,5 @@ promise1().then(function(){
 }).catch(function(err){
 	console.log('erroor');
 	});;*/
+
+
