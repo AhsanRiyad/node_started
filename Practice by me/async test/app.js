@@ -154,3 +154,32 @@ promise1().then(function(){
 	});;*/
 
 
+
+
+function f1(txt){
+
+	console.log('inside : f1'+ txt );
+	f2(txt , function(){
+		var i = 0;
+		for(i=0 ; i<10 ; i++)
+		{
+			console.log('output :'+ i);
+		}
+	});
+	console.log( 'below the callback f1 ');
+}
+
+
+function f2(txt , callback){
+
+	console.log('inside f2 :'+txt);
+	callback(txt);
+	console.log('f2 below the callback');
+
+	
+
+}
+
+
+
+f2('tex' , f1);
