@@ -23,8 +23,6 @@
  *
  *****************************************************************************/
 
-
-
 var async = require('async');
 var oracledb = require('oracledb');
 var dbConfig = require('./dbconfig.js');

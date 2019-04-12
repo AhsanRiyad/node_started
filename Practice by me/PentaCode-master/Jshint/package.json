@@ -1,0 +1,14 @@
+{
+  "name": "Jshint",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+  	"lint": "jshint index.js"
+  },
+  "devDependencies": {
+    "jshint": "2.8.0"
+  },
+  "author": "PentaCode",
+  "license": "ISC"
+}

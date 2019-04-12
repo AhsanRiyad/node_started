@@ -1,0 +1,12 @@
+body {
+	background-color: #4295c7;
+}
+
+.jumbotron-part-two {
+	display: none;
+}
+
+.logo {
+	display: inline;
+	float: right;
+}

@@ -16,18 +16,35 @@
  * limitations under the License.
  *
  * NAME
- *   dbmsoutputgetline.js
+ *   dbmsoutputpipe.js
  *
  * DESCRIPTION
- *   Displays PL/SQL DBMS_OUTPUT in node-oracledb, fetching one record at a time.
+ *   Displays PL/SQL DBMS_OUTPUT using a pipelined table.
+ *   Use demo.sql to create the dependencies or do:
+ *
+ *   CREATE OR REPLACE TYPE dorow AS TABLE OF VARCHAR2(32767);
+ *   /
+ *   SHOW ERRORS
+ *
+ *   CREATE OR REPLACE FUNCTION mydofetch RETURN dorow PIPELINED IS
+ *   line VARCHAR2(32767);
+ *   status INTEGER;
+ *   BEGIN LOOP
+ *     DBMS_OUTPUT.GET_LINE(line, status);
+ *     EXIT WHEN status = 1;
+ *     PIPE ROW (line);
+ *   END LOOP;
+ *   END;
+ *   /
+ *   SHOW ERRORS
  *
  *****************************************************************************/
-
-
 
 var async = require('async');
 var oracledb = require('oracledb');
 var dbConfig = require('./dbconfig.js');
+
+var numRows = 100;  // fetch this many records at a time
 
 oracledb.createPool(
   {
@@ -50,13 +67,14 @@ var doit = function(pool) {
       },
       enableDbmsOutput,
       createDbmsOutput,
-      fetchDbmsOutputLine
+      fetchDbmsOutput,
+      printDbmsOutput,
+      closeRS
     ],
     function (err, conn) {
       if (err) { console.error("In waterfall error cb: ==>", err, "<=="); }
       conn.close(function (err) { if (err) console.error(err.message); });
-    }
-  );
+    });
 };
 
 var enableDbmsOutput = function (conn, cb) {
@@ -74,19 +92,45 @@ var createDbmsOutput = function (conn, cb) {
     function(err) { return cb(err, conn); });
 };
 
-var fetchDbmsOutputLine = function (conn, cb) {
+var fetchDbmsOutput = function (conn, cb) {
   conn.execute(
-    "BEGIN DBMS_OUTPUT.GET_LINE(:ln, :st); END;",
-    { ln: { dir: oracledb.BIND_OUT, type: oracledb.STRING, maxSize: 32767 },
-      st: { dir: oracledb.BIND_OUT, type: oracledb.NUMBER } },
-    function(err, result) {
-      if (err) {
+    "SELECT * FROM TABLE(mydofetch())",
+    [],
+    { resultSet: true },
+    function (err, result) {
+      if (err)
         return cb(err, conn);
-      } else if (result.outBinds.st == 1) {
-        return cb(null, conn);  // no more output
+      else
+        return cb(null, conn, result);
+    });
+};
+
+var printDbmsOutput = function(conn, result, cb) {
+  if (result.resultSet) {
+    return fetchRowsFromRS(conn, result.resultSet, numRows, cb);
+  } else {
+    console.log("No results");
+    return cb(null, conn);
+  }
+};
+
+var fetchRowsFromRS = function(conn, resultSet, numRows, cb) {
+  resultSet.getRows(
+    numRows,
+    function (err, rows) {
+      if (err) {
+        return cb(err, conn, resultSet);
+      } else if (rows.length > 0) {
+        console.log(rows);
+        return fetchRowsFromRS(conn, resultSet, numRows, cb);
       } else {
-        console.log(result.outBinds.ln);
-        return fetchDbmsOutputLine(conn, cb);
+        return cb(null, conn, resultSet);
       }
     });
+};
+
+var closeRS = function(conn, resultSet, cb) {
+  resultSet.close(function(err) {
+    return cb(err, conn);
+  });
 };
